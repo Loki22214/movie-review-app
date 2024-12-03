@@ -1,12 +1,23 @@
 ﻿@page
-@model MovieReviewApp.Pages_Movies.IndexModel
+@model IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
 
+<div>
+ <!-- Sorting Dropdown -->
+  <form method="get">
+    <label for="sortOrder">Sort by:</label>
+    <select id="sortOrder" name="sortOrder" onchange="this.form.submit()">
+        <option value="">Default</option>
+        <option value="highestrating">Highest Rating</option>
+        <option value="lowestrating">Lowest Rating</option>
+    </select>
+</form>
+</div>
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
-@foreach (var movie in Model.Movie){
+@foreach (var movie in Model.Movies){
     
   <div class="col">
     <div class="card h-100">
@@ -14,6 +25,7 @@
       <div class="card-body">
         <h5 class="card-title">@movie.Title</h5>
         <p class="card-text">@movie.Rating</p>
+        <a asp-page="./MovieDescription" class = "btn btn-primary" asp-route-id="@movie.Id">Edit</a> 
       </div>
     </div>
   </div>
